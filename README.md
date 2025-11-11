@@ -421,25 +421,6 @@ This project is licensed under the **MIT License**. See the [LICENSE](LICENSE) f
 - **Streamlit**: Interactive web application framework
 - **Python Ecosystem**: NumPy, Pillow, and other supporting libraries
 
-## 📞 Support & Community
-
-### Getting Help
-- **📚 Documentation**: Complete guides in this README
-- **🐛 Bug Reports**: [GitHub Issues](https://github.com/shukur-alom/leaf-diseases-detect/issues)
-- **💡 Feature Requests**: [GitHub Discussions](https://github.com/shukur-alom/leaf-diseases-detect/discussions)
-- **👥 Community**: Join our developer community for collaboration
-
-### Professional Support
-- **Commercial Licensing**: Contact for enterprise deployment options
-- **Custom Development**: Specialized features and integrations available
-- **Training & Consulting**: AI model optimization and deployment guidance
-- **Technical Support**: Priority support packages for production deployments
-
-### Contact Information
-- **Project Maintainer**: [@shukur-alom](https://github.com/shukur-alom)
-- **Project Repository**: [leaf-diseases-detect](https://github.com/shukur-alom/leaf-diseases-detect)
-- **Issue Tracking**: GitHub Issues for bug reports and feature requests
-- **Email Support**: Available through GitHub contact options
 
 ## 🔗 Related Resources & References
 
