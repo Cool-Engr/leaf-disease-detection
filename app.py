@@ -33,9 +33,9 @@ async def disease_detection_file(file: UploadFile = File(...)):
         return JSONResponse(content=result)
     except HTTPException:
         raise
-    except Exception as e:
-        logger.error(f"Error in disease detection (file): {str(e)}")
-        raise HTTPException(status_code=500, detail=f"Internal server error: {str(e)}")
+    # except Exception as e:
+    #     logger.error(f"Error in disease detection (file): {str(e)}")
+    #     raise HTTPException(status_code=500, detail=f"Internal server error: {str(e)}")
 
 
 @app.get("/")
