@@ -112,59 +112,59 @@ class LeafDiseaseDetector:
         self.client = Groq(api_key=self.api_key)
         logger.info("Leaf Disease Detector initialized")
 
-    def create_analysis_prompt(self) -> str:
-        """
-        Create the standardized analysis prompt for the AI model.
+    # def create_analysis_prompt(self) -> str:
+    #     """
+    #     Create the standardized analysis prompt for the AI model.
 
-        Generates a comprehensive prompt that instructs the AI model to analyze
-        leaf images for diseases and return structured JSON results. The prompt
-        specifies the required output format and analysis criteria.
+    #     Generates a comprehensive prompt that instructs the AI model to analyze
+    #     leaf images for diseases and return structured JSON results. The prompt
+    #     specifies the required output format and analysis criteria.
 
-        Returns:
-            str: Formatted prompt string with instructions for disease analysis
-                 and JSON schema specification.
+    #     Returns:
+    #         str: Formatted prompt string with instructions for disease analysis
+    #              and JSON schema specification.
 
-        Note:
-            The prompt ensures consistent output formatting across all analyses
-            and includes all necessary fields for comprehensive disease assessment.
-        """
-        return """IMPORTANT: First determine if this image contains a plant leaf or vegetation. If the image shows humans, animals, objects, buildings, or anything other than plant leaves/vegetation, return the "invalid_image" response format below.
+    #     Note:
+    #         The prompt ensures consistent output formatting across all analyses
+    #         and includes all necessary fields for comprehensive disease assessment.
+    #     """
+    #     return """IMPORTANT: First determine if this image contains a plant leaf or vegetation. If the image shows humans, animals, objects, buildings, or anything other than plant leaves/vegetation, return the "invalid_image" response format below.
 
-        If this is a valid leaf/plant image, analyze it for diseases and return the results in JSON format.
+    #     If this is a valid leaf/plant image, analyze it for diseases and return the results in JSON format.
         
-        Please identify:
-        1. Whether this is actually a leaf/plant image
-        2. Disease name (if any)
-        3. Disease type/category or invalid_image
-        4. Severity level (mild, moderate, severe)
-        5. Confidence score (0-100%)
-        6. Symptoms observed
-        7. Possible causes
-        8. Treatment recommendations
+    #     Please identify:
+    #     1. Whether this is actually a leaf/plant image
+    #     2. Disease name (if any)
+    #     3. Disease type/category or invalid_image
+    #     4. Severity level (mild, moderate, severe)
+    #     5. Confidence score (0-100%)
+    #     6. Symptoms observed
+    #     7. Possible causes
+    #     8. Treatment recommendations
 
-        For NON-LEAF images (humans, animals, objects, or not detected as leaves, etc.), return this format:
-        {
-            "disease_detected": false,
-            "disease_name": null,
-            "disease_type": "invalid_image",
-            "severity": "none",
-            "confidence": 95,
-            "symptoms": ["This image does not contain a plant leaf"],
-            "possible_causes": ["Invalid image type uploaded"],
-            "treatment": ["Please upload an image of a plant leaf for disease analysis"]
-        }
+    #     For NON-LEAF images (humans, animals, objects, or not detected as leaves, etc.), return this format:
+    #     {
+    #         "disease_detected": false,
+    #         "disease_name": null,
+    #         "disease_type": "invalid_image",
+    #         "severity": "none",
+    #         "confidence": 95,
+    #         "symptoms": ["This image does not contain a plant leaf"],
+    #         "possible_causes": ["Invalid image type uploaded"],
+    #         "treatment": ["Please upload an image of a plant leaf for disease analysis"]
+    #     }
         
-        For VALID LEAF images, return this format:
-        {
-            "disease_detected": true/false,
-            "disease_name": "name of disease or null",
-            "disease_type": "fungal/bacterial/viral/pest/nutrient deficiency/healthy",
-            "severity": "mild/moderate/severe/none",
-            "confidence": 85,
-            "symptoms": ["list", "of", "symptoms"],
-            "possible_causes": ["list", "of", "causes"],
-            "treatment": ["list", "of", "treatments"]
-        }"""
+    #     For VALID LEAF images, return this format:
+    #     {
+    #         "disease_detected": true/false,
+    #         "disease_name": "name of disease or null",
+    #         "disease_type": "fungal/bacterial/viral/pest/nutrient deficiency/healthy",
+    #         "severity": "mild/moderate/severe/none",
+    #         "confidence": 85,
+    #         "symptoms": ["list", "of", "symptoms"],
+    #         "possible_causes": ["list", "of", "causes"],
+    #         "treatment": ["list", "of", "treatments"]
+    #     }"""
 
     def analyze_leaf_image_base64(self, base64_image: str,
                                   temperature: float = None,
