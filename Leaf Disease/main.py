@@ -166,84 +166,84 @@ class LeafDiseaseDetector:
             "treatment": ["list", "of", "treatments"]
         }"""
 
-    def analyze_leaf_image_base64(self, base64_image: str,
-                                  temperature: float = None,
-                                  max_tokens: int = None) -> Dict:
-        """
-        Analyze base64 encoded image data for leaf diseases and return JSON result.
+    # def analyze_leaf_image_base64(self, base64_image: str,
+    #                               temperature: float = None,
+    #                               max_tokens: int = None) -> Dict:
+    #     """
+    #     Analyze base64 encoded image data for leaf diseases and return JSON result.
 
-        First validates that the image contains a plant leaf. If the image shows
-        humans, animals, objects, or other non-plant content, returns an 
-        'invalid_image' response. For valid leaf images, performs disease analysis.
+    #     First validates that the image contains a plant leaf. If the image shows
+    #     humans, animals, objects, or other non-plant content, returns an 
+    #     'invalid_image' response. For valid leaf images, performs disease analysis.
 
-        Args:
-            base64_image (str): Base64 encoded image data (without data:image prefix)
-            temperature (float, optional): Model temperature for response generation
-            max_tokens (int, optional): Maximum tokens for response
+    #     Args:
+    #         base64_image (str): Base64 encoded image data (without data:image prefix)
+    #         temperature (float, optional): Model temperature for response generation
+    #         max_tokens (int, optional): Maximum tokens for response
 
-        Returns:
-            Dict: Analysis results as dictionary (JSON serializable)
-                 - For invalid images: disease_type will be 'invalid_image'
-                 - For valid leaves: standard disease analysis results
+    #     Returns:
+    #         Dict: Analysis results as dictionary (JSON serializable)
+    #              - For invalid images: disease_type will be 'invalid_image'
+    #              - For valid leaves: standard disease analysis results
 
-        Raises:
-            Exception: If analysis fails
-        """
-        try:
-            logger.info("Starting analysis for base64 image data")
+    #     Raises:
+    #         Exception: If analysis fails
+    #     """
+    #     try:
+    #         logger.info("Starting analysis for base64 image data")
 
-            # Validate base64 input
-            if not isinstance(base64_image, str):
-                raise ValueError("base64_image must be a string")
+    #         # Validate base64 input
+    #         if not isinstance(base64_image, str):
+    #             raise ValueError("base64_image must be a string")
 
-            if not base64_image:
-                raise ValueError("base64_image cannot be empty")
+    #         if not base64_image:
+    #             raise ValueError("base64_image cannot be empty")
 
-            # Clean base64 string (remove data URL prefix if present)
-            if base64_image.startswith('data:'):
-                base64_image = base64_image.split(',', 1)[1]
+    #         # Clean base64 string (remove data URL prefix if present)
+    #         if base64_image.startswith('data:'):
+    #             base64_image = base64_image.split(',', 1)[1]
 
-            # Prepare request parameters
-            temperature = temperature or self.DEFAULT_TEMPERATURE
-            max_tokens = max_tokens or self.DEFAULT_MAX_TOKENS
+    #         # Prepare request parameters
+    #         temperature = temperature or self.DEFAULT_TEMPERATURE
+    #         max_tokens = max_tokens or self.DEFAULT_MAX_TOKENS
 
-            # Make API request
-            completion = self.client.chat.completions.create(
-                model=self.MODEL_NAME,
-                messages=[
-                    {
-                        "role": "user",
-                        "content": [
-                            {
-                                "type": "text",
-                                "text": self.create_analysis_prompt()
-                            },
-                            {
-                                "type": "image_url",
-                                "image_url": {
-                                    "url": f"data:image/jpeg;base64,{base64_image}"
-                                }
-                            }
-                        ]
-                    }
-                ],
-                temperature=temperature,
-                max_completion_tokens=max_tokens,
-                top_p=1,
-                stream=False,
-                stop=None,
-            )
+    #         # Make API request
+    #         completion = self.client.chat.completions.create(
+    #             model=self.MODEL_NAME,
+    #             messages=[
+    #                 {
+    #                     "role": "user",
+    #                     "content": [
+    #                         {
+    #                             "type": "text",
+    #                             "text": self.create_analysis_prompt()
+    #                         },
+    #                         {
+    #                             "type": "image_url",
+    #                             "image_url": {
+    #                                 "url": f"data:image/jpeg;base64,{base64_image}"
+    #                             }
+    #                         }
+    #                     ]
+    #                 }
+    #             ],
+    #             temperature=temperature,
+    #             max_completion_tokens=max_tokens,
+    #             top_p=1,
+    #             stream=False,
+    #             stop=None,
+    #         )
 
-            logger.info("API request completed successfully")
-            result = self._parse_response(
-                completion.choices[0].message.content)
+    #         logger.info("API request completed successfully")
+    #         result = self._parse_response(
+    #             completion.choices[0].message.content)
 
-            # Return as dictionary for JSON serialization
-            return result.__dict__
+    #         # Return as dictionary for JSON serialization
+    #         return result.__dict__
 
-        except Exception as e:
-            logger.error(f"Analysis failed for base64 image data: {str(e)}")
-            raise
+    #     except Exception as e:
+    #         logger.error(f"Analysis failed for base64 image data: {str(e)}")
+    #         raise
 
     def _parse_response(self, response_content: str) -> DiseaseAnalysisResult:
         """
