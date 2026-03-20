@@ -32,9 +32,9 @@ def test_with_base64_data(base64_image_string: str):
         result = detector.analyze_leaf_image_base64(base64_image_string)
         print(json.dumps(result, indent=2))
         return result
-    # except Exception as e:
-    #     print(f'{{"error": "{str(e)}"}}')
-    #     return None
+    except Exception as e:
+        print(f'{{"error": "{str(e)}"}}')
+        return None
 
 
 def convert_image_to_base64_and_test(image_bytes: bytes):
