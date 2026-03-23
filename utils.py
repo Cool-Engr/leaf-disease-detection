@@ -32,29 +32,29 @@ def test_with_base64_data(base64_image_string: str):
         result = detector.analyze_leaf_image_base64(base64_image_string)
         print(json.dumps(result, indent=2))
         return result
-    # except Exception as e:
-    #     print(f'{{"error": "{str(e)}"}}')
-    #     return None
-
-
-def convert_image_to_base64_and_test(image_bytes: bytes):
-    """
-    Convert image bytes to base64 and test it
-
-    Args:
-        image_bytes (bytes): Image data in bytes
-    """
-    try:
-        if not image_bytes:
-            print('{"error": "No image bytes provided"}')
-            return None
-
-        base64_string = base64.b64encode(image_bytes).decode('utf-8')
-        print(f"Converted image to base64 ({len(base64_string)} characters)")
-        return test_with_base64_data(base64_string)
     except Exception as e:
         print(f'{{"error": "{str(e)}"}}')
         return None
+
+
+# def convert_image_to_base64_and_test(image_bytes: bytes):
+#     """
+#     Convert image bytes to base64 and test it
+
+#     Args:
+#         image_bytes (bytes): Image data in bytes
+#     """
+#     try:
+#         if not image_bytes:
+#             print('{"error": "No image bytes provided"}')
+#             return None
+
+#         base64_string = base64.b64encode(image_bytes).decode('utf-8')
+#         print(f"Converted image to base64 ({len(base64_string)} characters)")
+#         return test_with_base64_data(base64_string)
+#     except Exception as e:
+#         print(f'{{"error": "{str(e)}"}}')
+#         return None
 
 
 def main():
